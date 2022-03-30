@@ -6,12 +6,13 @@ import Home from '@/views/home/index.vue'
 import My from '@/views/my/index.vue'
 import Shipin from '@/views/shipin/index.vue'
 import Wenda from '@/views/wenda/index.vue'
-
+import Search from '@/views/search/search.vue'
 Vue.use(VueRouter)
 
 const routes = [
   { path: '', redirect: '/login' },
   { path: '/login', component: Login },
+  { path: '/search', component: Search },
   {
     path: '/layout',
     component: Layout,
@@ -21,6 +22,7 @@ const routes = [
       { path: 'wenda', component: Wenda },
       { path: 'shipin', component: Shipin },
       { path: 'my', component: My }
+
     ]
   }
 ]
