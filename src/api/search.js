@@ -9,3 +9,10 @@ export const getSuggest = (q) => {
 
   })
 }
+export const getResult = (params) => {
+  return requset({
+    method: 'GET',
+    url: '/v1_0/search',
+    params: params
+  })
+}

@@ -6,38 +6,51 @@
       finished-text="没有更多了"
       @load="onLoad"
     >
-     <van-cell v-for="item in list" :key="item" :title="item" />
+     <van-cell v-for="(item,index) in searchResult" :key="index" :title="item.title" />
    </van-list>
   </div>
 </template>
 
 <script>
+import { getResult } from '@/api/search.js'
 export default {
+  props: {
+    searchText: { // 接收父组件搜索框的文本
+      type: String,
+      required: true
+    }
+  },
   data () {
     return {
-      list: [],
+      searchResult: [],
       loading: false,
-      finished: false
+      finished: false,
+      page: 1,
+      perpage: 10,
+      searchHistory: []
     }
   },
   methods: {
-    onLoad () {
-      // 异步更新数据
-      // setTimeout 仅做示例，真实场景中一般为 ajax 请求
-      setTimeout(() => {
-        for (let i = 0; i < 10; i++) {
-          this.list.push(this.list.length + 1)
-        }
-
-        // 加载状态结束
+    async onLoad () {
+      try {
+        const { data: res } = await getResult({
+          page: this.page,
+          per_page: this.perpage,
+          q: this.searchText
+        })
+        this.searchResult.push(...res.data.results)
         this.loading = false
-
-        // 数据全部加载完成
-        if (this.list.length >= 40) {
+        if (res.data.results.length) {
+          this.page++
+        } else {
+          this.$toast('搜索结束')
           this.finished = true
         }
-      }, 1000)
+      } catch (err) {
+        this.$toast('请求搜索结果失败，请稍后重试')
+      }
     }
+
   }
 }
 </script>
