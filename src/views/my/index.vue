@@ -49,7 +49,7 @@
     <!-- 宫格导航 -->
     <van-grid clickable :column-num="2">
       <van-grid-item text="收藏" to="/" ><i slot="icon" class="toutiao toutiao-shoucang"></i></van-grid-item>
-      <van-grid-item text="历史" url="/vant/mobile.html" ><i slot="icon" class="toutiao toutiao-lishi"></i></van-grid-item>
+      <van-grid-item text="历史" to="/" ><i slot="icon" class="toutiao toutiao-lishi"></i></van-grid-item>
     </van-grid>
     <!-- 功能列表 -->
     <van-cell-group>

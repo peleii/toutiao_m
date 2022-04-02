@@ -7,12 +7,18 @@ import My from '@/views/my/index.vue'
 import Shipin from '@/views/shipin/index.vue'
 import Wenda from '@/views/wenda/index.vue'
 import Search from '@/views/search/search.vue'
+import ArticleDetail from '@/views/articleDetail/index.vue'
 Vue.use(VueRouter)
 
 const routes = [
   { path: '', redirect: '/login' },
   { path: '/login', component: Login },
   { path: '/search', component: Search },
+  {
+    path: '/article/:articleId',
+    component: ArticleDetail,
+    props: true// 开启props传参
+  },
   {
     path: '/layout',
     component: Layout,

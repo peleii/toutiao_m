@@ -6,7 +6,7 @@
       finished-text="没有更多了"
       @load="onLoad"
     >
-     <van-cell v-for="(item,index) in searchResult" :key="index" :title="item.title" />
+     <van-cell v-for="(item,index) in searchResult" :key="index" :title="item.title" :to="'/article/'+ item.art_id"/>
    </van-list>
   </div>
 </template>

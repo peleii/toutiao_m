@@ -1,6 +1,6 @@
 <template>
   <div>
-    <van-cell class="articleItem">
+    <van-cell class="articleItem" :to="'/article/'+ article.art_id">
       <template #title>
         <div class="title van-multi-ellipsis--l2">
           {{article.title}}
@@ -36,7 +36,7 @@
           <div class="articleInfo">
             <span>{{article.aut_name}}</span>
             <span>{{article.comm_count}}评论</span>
-            <span>{{article.pubdate}}</span>
+            <span>{{article.pubdate|relativeTime}}</span>
           </div>
         </div>
       </template>
@@ -61,6 +61,9 @@ export default {
       type: Object,
       required: true
     }
+  },
+  methods: {
+
   }
 }
 </script>
