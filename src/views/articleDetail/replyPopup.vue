@@ -1,7 +1,7 @@
 <template>
   <div class="comment-reply">
     <!-- 导航栏 -->
-    <van-nav-bar :title="`${comment.reply_count}条回复`">
+    <van-nav-bar :title="`${replyCount}条回复`">
       <van-icon
         slot="left"
         name="cross"
@@ -16,13 +16,13 @@
 
     <van-cell title="所有回复" class="allReply" />
 
-    <CommentList :commentId='comment.com_id' />
+    <CommentList :commentId='comment.com_id' :comments="replyList"/>
 
     <!-- 底部 -->
     <van-button type="default" size="large" class="commentBtn" @click="reply">发表评论</van-button>
     <!-- 发布评论弹出层 -->
     <van-popup v-model="isShowPop" position="bottom" :style="{ height: '20%' }">
-      <CommentPopup :targetId="comment.com_id" :articleId='articleId' @updateIsShowPop="updateIsShowPop"/>
+      <CommentPopup :targetId="comment.com_id" :articleId='articleId' @postSuccess="handlePostSuccess"/>
     </van-popup>
     <!-- /底部 -->
   </div>
@@ -51,7 +51,9 @@ export default {
     return {
       offset: null, // 获取下一页数据的标记
       limit: 10, // 每页展示的条数
-      isShowPop: false
+      isShowPop: false,
+      replyCount: this.comment.reply_count,
+      replyList: []// 评论的回复列表
     }
   },
   computed: {},
@@ -63,8 +65,13 @@ export default {
     reply () {
       this.isShowPop = true
     },
-    updateIsShowPop () {
+    // 回复评论成功后更新评论数据
+    handlePostSuccess (data) {
+      // 关闭弹出层
       this.isShowPop = false
+      // 更新评论回复列表
+      this.replyList.unshift(data.new_obj)
+      this.replyCount++
     }
   }
 }

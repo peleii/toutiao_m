@@ -9,7 +9,7 @@
       :immediate-check=false
      >
      <CommentItem
-      v-for="(item,index) in comments" :key="index"
+      v-for="(item,index) in commentList" :key="index"
       :comment=item
       @click-reply="$emit('changeReplyPopToIndex',$event)"
      ></CommentItem>
@@ -30,11 +30,15 @@ export default {
     commentId: {
       type: [Number, String],
       required: true
+    },
+    comments: {
+      type: Array,
+      default: () => []
     }
   },
   data () {
     return {
-      comments: [],
+      commentList: this.comments,
       loading: false,
       finished: false,
       offset: null, // 获取下一页数据的标记
@@ -50,7 +54,7 @@ export default {
           offset: this.offset,
           limit: this.limit
         })
-        this.comments.unshift(...res.data.results)
+        this.commentList.unshift(...res.data.results)
         this.$emit('totalCount', res.data.total_count)
         // 判断是否还有数据
         if (res.data.results.length) {

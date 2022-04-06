@@ -57,8 +57,8 @@ export default {
         })
         console.log(res)
         this.$toast.success('发布成功')
-        // 通知父组件关闭弹出层
-        this.$emit('updateIsShowPop')
+        // 通知父组件更新数据
+        this.$emit('postSuccess', res.data)
       } catch (err) {
         this.$toast.fail('发布失败')
       }

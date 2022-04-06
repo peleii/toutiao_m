@@ -43,7 +43,7 @@
         <!-- 文章内容 -->
         <div class="article-content markdown-body">{{articleDetail.content}}</div>
         <van-divider>正文结束</van-divider>
-        <CommentList :articleId="articleId" @totalCount='updateTotalCount' @changeReplyPopToIndex="updateIsShowReplyPop"></CommentList>
+        <CommentList :articleId="articleId" @totalCount='updateTotalCount' @changeReplyPopToIndex="updateIsShowReplyPop" :comments="commentList"></CommentList>
          <!-- 底部区域 -->
         <div class="article-bottom">
           <van-button
@@ -70,7 +70,7 @@
         <!-- /底部区域 -->
         <!-- 发布评论弹出层 -->
         <van-popup v-model="isShowPop" position="bottom" :style="{ height: '20%' }">
-          <CommentPopup :targetId="articleId" @updateIsShowPop="updateIsShowPop"/>
+          <CommentPopup :targetId="articleId" @postSuccess="handlePostSuccess"/>
         </van-popup>
         <!-- 回复评论弹出层 -->
         <van-popup v-model="isShowReplyPop" position="bottom" :style="{ height: '80%' }">
@@ -127,7 +127,8 @@ export default {
       totalCount: 0, // 评论数量
       isShowPop: false, // 控制文章评论弹出层是否显示
       isShowReplyPop: false, // 控制回复评论弹出层是否显示
-      comment: null // 点击回复时对应的评论项
+      comment: null, // 点击回复时对应的评论项
+      commentList: []// 文章所有评论
     }
   },
   computed: {},
@@ -166,9 +167,14 @@ export default {
     showPopup () {
       this.isShowPop = true
     },
-    // 发布评论成功后更新弹层状态
-    updateIsShowPop (val) {
-      this.isShowPop = val
+    // 发布评论成功后
+    handlePostSuccess (data) {
+      // 关闭弹出层
+      this.isShowPop = false
+      // 更新评论列表
+      this.commentList.unshift(data.new_obj)
+      // 更新评论数量
+      this.totalCount++
     },
     updateIsShowReplyPop (val) {
       this.isShowReplyPop = true
