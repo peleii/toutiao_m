@@ -3,8 +3,6 @@
     <router-view></router-view>
     <van-tabbar  class="layout-tabbar" route>
       <van-tabbar-item replace to="/layout/home"><i slot="icon" class="toutiao toutiao-shouye"></i> 首页</van-tabbar-item>
-      <van-tabbar-item replace to="/layout/wenda"><i slot="icon" class="toutiao toutiao-wenda"></i>问答</van-tabbar-item>
-      <van-tabbar-item replace to="/layout/shipin"><i slot="icon" class="toutiao toutiao-shipin"></i>视频</van-tabbar-item>
       <van-tabbar-item replace to="/layout/my"><i slot="icon" class="toutiao toutiao-wode"></i>{{$store.state.user?'我的':'未登录'}}</van-tabbar-item>
     </van-tabbar>
   </div>

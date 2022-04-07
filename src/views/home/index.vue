@@ -2,17 +2,10 @@
 <!-- 首页 -->
   <div class="home-container">
     <!-- 顶部导航栏 -->
-    <van-nav-bar fixed>
-     <template #title>
-        <van-search
-          v-model="value"
-          placeholder="请输入搜索关键词"
-          shape="round"
-          background="#3296FA"
-          class="nav-search"
-          @search="onSearch"
-        />
-     </template>
+    <van-nav-bar fixed  title="it资讯">
+      <template #right>
+        <van-icon name="search" size="18" @click="onSearch" />
+      </template>
     </van-nav-bar>
     <!-- 频道列表 -->
     <van-tabs
@@ -136,21 +129,12 @@ export default {
    /deep/.van-nav-bar__content{
      height: 100px;
      background-color: #3296FA;
-     .van-search{
-       width: 80%;
-       margin: 0 auto;
-       height: 100px;
-       .van-search__content--round{
-         background-color:#5BABFB;
-         .van-cell{
-            height: 60px;
-            /deep/.van-icon{
-              color: #fff;
-            }
-          }
-       }
-
-     }
+    .van-nav-bar__title{
+      color: #fff;
+    }
+    .van-icon{
+      color: #fff;
+    }
    }
    /deep/.channel-tabs{
      .van-tab {

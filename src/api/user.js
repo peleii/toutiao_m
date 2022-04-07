@@ -40,3 +40,26 @@ export const cancelFollowing = (target) => {
     url: `/v1_0/user/followings/${target}`
   })
 }
+// 获取用户个人资料
+export const getUserInfo = () => {
+  return request({
+    method: 'GET',
+    url: '/v1_0/user/profile'
+  })
+}
+// 编辑用户资料
+export const editUserInfo = (data) => {
+  return request({
+    method: 'PATCH',
+    url: '/v1_0/user/profile',
+    data
+  })
+}
+// 上传头像
+export const uploadPhoto = data => {
+  return request({
+    method: 'PATCH',
+    url: '/v1_0/user/photo',
+    data
+  })
+}
