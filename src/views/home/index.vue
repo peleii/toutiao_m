@@ -2,7 +2,7 @@
 <!-- 首页 -->
   <div class="home-container">
     <!-- 顶部导航栏 -->
-    <van-nav-bar fixed  title="it资讯">
+    <van-nav-bar fixed  title="黑马头条">
       <template #right>
         <van-icon name="search" size="18" @click="onSearch" />
       </template>
